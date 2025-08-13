@@ -3,12 +3,11 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { useAuth } from '../contexts/AuthContext';
 import { Calendar, Clock, Award, BookOpen, Video } from 'lucide-react';
-import { fetchStudentByEmail, fetchUpcomingSessions, fetchRecommendedVideos, type StudentSession } from '../lib/studentApi';
-import type { Video as VideoType, Student as StudentType } from '../lib/supabase';
+import { fetchUpcomingSessions, fetchRecommendedVideos, type StudentSession } from '../lib/studentApi';
+import type { Video as VideoType } from '../lib/supabase';
 
 export default function StudentDashboard() {
-  const { user } = useAuth();
-  const [student, setStudent] = useState<StudentType | null>(null);
+  const { user, userProfile } = useAuth();
   const [sessions, setSessions] = useState<StudentSession[]>([]);
   const [videos, setVideos] = useState<VideoType[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -22,30 +21,57 @@ export default function StudentDashboard() {
   useEffect(() => {
     let isMounted = true;
     (async () => {
-      if (!user?.email) {
+      if (!userProfile?.id) {
         setLoading(false);
         return;
       }
-      const profile = await fetchStudentByEmail(user.email);
-      if (!isMounted) return;
-      setStudent(profile);
-      if (profile?.id) {
+      
+      try {
         const [upcoming, recVideos] = await Promise.all([
-          fetchUpcomingSessions(profile.id),
+          fetchUpcomingSessions(userProfile.id),
           fetchRecommendedVideos(4),
         ]);
+        
         if (!isMounted) return;
         setSessions(upcoming);
         setVideos(recVideos);
+      } catch (error) {
+        console.error('Error fetching dashboard data:', error);
+      } finally {
+        if (isMounted) {
+          setLoading(false);
+        }
       }
-      setLoading(false);
     })();
     return () => {
       isMounted = false;
     };
-  }, [user?.email]);
+  }, [userProfile?.id]);
 
   const nextSession = useMemo(() => sessions[0], [sessions]);
+
+  const getUserDisplayName = () => {
+    if (userProfile?.name) return userProfile.name;
+    if (user?.displayName) return user.displayName;
+    if (user?.email) return user.email.split('@')[0];
+    return 'Student';
+  };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gray-50">
+        <Header />
+        <div className="pt-20">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center py-12">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
+              <p className="mt-4 text-gray-600">Loading your dashboard...</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -54,7 +80,7 @@ export default function StudentDashboard() {
       <div className="pt-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-8">
-            <h1 className="text-3xl md:text-4xl font-bold text-gray-900">Welcome{student?.name ? `, ${student.name}` : user?.displayName ? `, ${user.displayName}` : ''}</h1>
+            <h1 className="text-3xl md:text-4xl font-bold text-gray-900">Welcome, {getUserDisplayName()}!</h1>
             <p className="text-gray-600 mt-2">{user?.email}</p>
           </div>
 

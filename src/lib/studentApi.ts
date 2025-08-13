@@ -10,6 +10,12 @@ export interface StudentSession {
   zoom_url?: string;
 }
 
+export interface CreateStudentProfileData {
+  email: string;
+  name: string;
+  firebase_uid?: string;
+}
+
 export async function fetchStudentByEmail(email: string): Promise<Student | null> {
   const { data, error } = await supabase
     .from('students')
@@ -23,6 +29,28 @@ export async function fetchStudentByEmail(email: string): Promise<Student | null
     return null;
   }
   return data as unknown as Student | null;
+}
+
+export async function createStudentProfile(profileData: CreateStudentProfileData): Promise<Student> {
+  const { data, error } = await supabase
+    .from('students')
+    .insert({
+      email: profileData.email,
+      name: profileData.name,
+      firebase_uid: profileData.firebase_uid,
+      status: 'active',
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString()
+    })
+    .select()
+    .single();
+
+  if (error) {
+    console.error('createStudentProfile error:', error.message);
+    throw new Error(`Failed to create student profile: ${error.message}`);
+  }
+  
+  return data as unknown as Student;
 }
 
 export async function fetchUpcomingSessions(studentId: string, nowIso?: string): Promise<StudentSession[]> {

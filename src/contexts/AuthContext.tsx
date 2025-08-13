@@ -9,15 +9,27 @@ import {
   User,
   createUserWithEmailAndPassword
 } from 'firebase/auth';
+import { fetchStudentByEmail, createStudentProfile } from '../lib/studentApi';
+
+interface UserProfile {
+  id: string;
+  email: string;
+  name?: string;
+  role: 'student' | 'admin';
+  createdAt: string;
+  updatedAt: string;
+}
 
 interface AuthContextType {
   isAuthenticated: boolean;
   user: User | null;
+  userProfile: UserProfile | null;
   isLoading: boolean;
   login: (email: string, password: string) => Promise<void>;
   signInWithGoogle: () => Promise<void>;
   register: (email: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
+  refreshUserProfile: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -36,8 +48,56 @@ interface AuthProviderProps {
 
 export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<User | null>(null);
+  const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const demoEnabled = false; // Disable demo mode since we have real Firebase configured
+
+  // Function to fetch or create user profile
+  const fetchOrCreateUserProfile = async (firebaseUser: User) => {
+    try {
+      // Try to fetch existing profile
+      const existingProfile = await fetchStudentByEmail(firebaseUser.email!);
+      
+      if (existingProfile) {
+        // Profile exists, use it
+        setUserProfile({
+          id: existingProfile.id,
+          email: existingProfile.email,
+          name: existingProfile.name || firebaseUser.displayName || undefined,
+          role: 'student',
+          createdAt: existingProfile.created_at,
+          updatedAt: existingProfile.updated_at
+        });
+      } else {
+        // Create new profile for Google sign-in users
+        const newProfile = await createStudentProfile({
+          email: firebaseUser.email!,
+          name: firebaseUser.displayName || firebaseUser.email!.split('@')[0],
+          firebase_uid: firebaseUser.uid
+        });
+        
+        setUserProfile({
+          id: newProfile.id,
+          email: newProfile.email,
+          name: newProfile.name,
+          role: 'student',
+          createdAt: newProfile.created_at,
+          updatedAt: newProfile.updated_at
+        });
+      }
+    } catch (error) {
+      console.error('Error fetching/creating user profile:', error);
+      // Set a basic profile if database operations fail
+      setUserProfile({
+        id: firebaseUser.uid,
+        email: firebaseUser.email!,
+        name: firebaseUser.displayName || firebaseUser.email!.split('@')[0],
+        role: 'student',
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString()
+      });
+    }
+  };
 
   useEffect(() => {
     if (!auth) {
@@ -50,10 +110,21 @@ export function AuthProvider({ children }: AuthProviderProps) {
       setIsLoading(false);
       return;
     }
-    const unsub = onAuthStateChanged(auth, (firebaseUser) => {
+    
+    const unsub = onAuthStateChanged(auth, async (firebaseUser) => {
       setUser(firebaseUser);
+      
+      if (firebaseUser) {
+        // User is signed in, fetch or create profile
+        await fetchOrCreateUserProfile(firebaseUser);
+      } else {
+        // User is signed out
+        setUserProfile(null);
+      }
+      
       setIsLoading(false);
     });
+    
     return () => unsub();
   }, []);
 
@@ -105,20 +176,29 @@ export function AuthProvider({ children }: AuthProviderProps) {
     if (!auth || demoEnabled) {
       localStorage.removeItem('demo_user_email');
       setUser(null);
+      setUserProfile(null);
       return;
     }
     await signOut(auth);
   };
 
+  const refreshUserProfile = async () => {
+    if (user?.email) {
+      await fetchOrCreateUserProfile(user);
+    }
+  };
+
   const value = useMemo<AuthContextType>(() => ({
     isAuthenticated: Boolean(user),
     user,
+    userProfile,
     isLoading,
     login,
     signInWithGoogle,
     register,
     logout,
-  }), [user, isLoading]);
+    refreshUserProfile,
+  }), [user, userProfile, isLoading]);
 
   return (
     <AuthContext.Provider value={value}>
