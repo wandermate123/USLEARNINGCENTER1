@@ -35,7 +35,7 @@ export default function SquarePaymentLink({
     try {
       // Use production URL when in production, localhost for development
       const apiUrl = import.meta.env.PROD 
-        ? 'https://your-actual-domain.com/api' // Replace with your actual domain
+        ? 'https://uslearningcenter-1.vercel.app/api' // Your Vercel domain
         : 'http://localhost:5073/api';
         
       // Create payment link through our backend

@@ -1,12 +1,22 @@
 import React, { createContext, useContext, useEffect, useMemo, useState, ReactNode } from 'react';
 import { auth } from '../lib/firebase';
-import { onAuthStateChanged, signInWithEmailAndPassword, signOut, User } from 'firebase/auth';
+import { 
+  onAuthStateChanged, 
+  signInWithEmailAndPassword, 
+  signInWithPopup, 
+  GoogleAuthProvider, 
+  signOut, 
+  User,
+  createUserWithEmailAndPassword
+} from 'firebase/auth';
 
 interface AuthContextType {
   isAuthenticated: boolean;
   user: User | null;
   isLoading: boolean;
   login: (email: string, password: string) => Promise<void>;
+  signInWithGoogle: () => Promise<void>;
+  register: (email: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
 }
 
@@ -27,7 +37,7 @@ interface AuthProviderProps {
 export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const demoEnabled = (import.meta as any).env?.VITE_DEMO_AUTH === 'true' || !auth;
+  const demoEnabled = false; // Disable demo mode since we have real Firebase configured
 
   useEffect(() => {
     if (!auth) {
@@ -64,6 +74,33 @@ export function AuthProvider({ children }: AuthProviderProps) {
     await signInWithEmailAndPassword(auth, email, password);
   };
 
+  const register = async (email: string, password: string) => {
+    if (!auth || demoEnabled) {
+      // Demo registration - just store the email
+      localStorage.setItem('demo_user_email', email);
+      setUser({ email } as unknown as User);
+      return;
+    }
+    await createUserWithEmailAndPassword(auth, email, password);
+  };
+
+  const signInWithGoogle = async () => {
+    if (!auth || demoEnabled) {
+      // Demo Google sign-in - simulate with a demo email
+      const demoEmail = 'demo-google-user@uslc.test';
+      localStorage.setItem('demo_user_email', demoEmail);
+      setUser({ email: demoEmail } as unknown as User);
+      return;
+    }
+    
+    const provider = new GoogleAuthProvider();
+    provider.setCustomParameters({
+      prompt: 'select_account'
+    });
+    
+    await signInWithPopup(auth, provider);
+  };
+
   const logout = async () => {
     if (!auth || demoEnabled) {
       localStorage.removeItem('demo_user_email');
@@ -78,6 +115,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
     user,
     isLoading,
     login,
+    signInWithGoogle,
+    register,
     logout,
   }), [user, isLoading]);
 

@@ -43,14 +43,16 @@ app.use(cors({
     
     // Allow production domains (update these with your actual domains)
     const allowedOrigins = [
-      // Replace these with your actual domain
-      'https://yourdomain.com',
-      'https://www.yourdomain.com',
-      'https://uslearningcentre.com',
-      'https://www.uslearningcentre.com',
-      // Add your actual production domain here
-      // 'https://your-actual-domain.com',
-      // 'https://www.your-actual-domain.com'
+      // Your Vercel production domain
+      'https://uslearningcenter-1.vercel.app',
+      
+      // Development domains (keep these for local testing)
+      'http://localhost:5173',
+      'http://localhost:5174',
+      'http://localhost:5175',
+      'http://localhost:5176',
+      'http://localhost:5177',
+      'http://localhost:5178'
     ];
     
     if (allowedOrigins.includes(origin)) {

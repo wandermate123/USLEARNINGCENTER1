@@ -5,6 +5,7 @@ import ProgramsPage from './pages/ProgramsPage';
 import AdminLogin from './pages/AdminLogin';
 import AdminDashboard from './pages/AdminDashboard';
 import StudentLogin from './pages/StudentLogin';
+import StudentLoginExisting from './pages/StudentLoginExisting';
 import StudentDashboard from './pages/StudentDashboard';
 import PaymentPage from './pages/PaymentPage';
 import PaymentSuccessPage from './pages/PaymentSuccessPage';
@@ -24,16 +25,10 @@ function App() {
         <div className="min-h-screen bg-white">
           <Routes>
             <Route path="/" element={<LandingPage />} />
-            <Route
-              path="/programs"
-              element={
-                <ProtectedRoute redirectTo="/student/login?redirect=/programs">
-                  <ProgramsPage />
-                </ProtectedRoute>
-              }
-            />
+            <Route path="/programs" element={<ProgramsPage />} />
             <Route path="/admin/login" element={<AdminLogin />} />
-            <Route path="/student/login" element={<StudentLogin />} />
+            <Route path="/student/register" element={<StudentLogin />} />
+            <Route path="/student/login" element={<StudentLoginExisting />} />
             <Route
               path="/admin/dashboard"
               element={

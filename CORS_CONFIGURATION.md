@@ -232,10 +232,9 @@ app.use(cors({
     
     // Production domains
     const allowedOrigins = [
+      'https://uslearningcenter-1.vercel.app',  // Your Vercel domain
       'https://uslearningcentre.com',
-      'https://www.uslearningcentre.com',
-      'https://myapp.vercel.app',
-      'https://myapp.netlify.app'
+      'https://www.uslearningcentre.com'
     ];
     
     if (allowedOrigins.includes(origin)) {

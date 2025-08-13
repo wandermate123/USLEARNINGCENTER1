@@ -3,13 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import { Eye, EyeOff } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 
-export default function StudentLogin() {
+export default function StudentLoginExisting() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const { login, signInWithGoogle, register } = useAuth();
+  const { login, signInWithGoogle } = useAuth();
   const navigate = useNavigate();
 
   const handleEmailLogin = async (e: React.FormEvent) => {
@@ -17,10 +17,10 @@ export default function StudentLogin() {
     setError('');
     setIsLoading(true);
     try {
-      await register(email, password);
+      await login(email, password);
       navigate('/student/dashboard');
     } catch (err: any) {
-      const message = err?.message || 'Failed to register';
+      const message = err?.message || 'Failed to sign in';
       setError(message);
     } finally {
       setIsLoading(false);
@@ -46,7 +46,7 @@ export default function StudentLogin() {
       <div className="max-w-md w-full">
         {/* Title */}
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">Register</h1>
+          <h1 className="text-3xl font-bold text-gray-900">Log in</h1>
         </div>
 
         {/* Google Sign-in Button */}
@@ -132,18 +132,28 @@ export default function StudentLogin() {
             disabled={isLoading}
             className="w-full bg-purple-600 text-white py-3 rounded-lg font-medium hover:bg-purple-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {isLoading ? 'Signing in...' : 'Register'}
+            {isLoading ? 'Signing in...' : 'Log in'}
           </button>
         </form>
 
-        {/* Login Link */}
+        {/* Register Link */}
         <div className="mt-6 text-center text-sm text-gray-600">
-          Already have an account?{' '}
+          Don't have an account?{' '}
           <button
-            onClick={() => navigate('/student/login')}
+            onClick={() => navigate('/student/register')}
             className="text-purple-600 hover:text-purple-700 underline font-medium"
           >
-            Log in
+            Register
+          </button>
+        </div>
+
+        {/* Forgot Password Link */}
+        <div className="mt-4 text-center text-sm text-gray-600">
+          <button
+            onClick={() => navigate('/student/forgot-password')}
+            className="text-purple-600 hover:text-purple-700 underline"
+          >
+            Forgot your password?
           </button>
         </div>
 
@@ -162,4 +172,3 @@ export default function StudentLogin() {
     </div>
   );
 }
-

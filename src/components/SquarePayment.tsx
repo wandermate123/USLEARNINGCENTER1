@@ -214,7 +214,7 @@ export default function SquarePayment({
 
       // Use production URL when in production, localhost for development
       const apiUrl = import.meta.env.PROD 
-        ? 'https://your-actual-domain.com/api' // Replace with your actual domain
+        ? 'https://uslearningcenter-1.vercel.app/api' // Your Vercel domain
         : 'http://localhost:5073/api';
         
       const response = await fetch(`${apiUrl}/payments`, {
