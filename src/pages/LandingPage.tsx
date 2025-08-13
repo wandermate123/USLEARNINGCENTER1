@@ -118,7 +118,7 @@ export default function LandingPage() {
               </div>
               <h3 className="text-lg font-bold text-gray-900 mb-3">Select Package</h3>
               <p className="text-gray-600">
-                Choose from 8, 16, or 24 session packages. Sessions must be used within 30, 60, or 90 days respectively.
+                Choose from 8, 16, or 24 session packages with attractive discounts for longer commitments
               </p>
             </div>
 
@@ -238,7 +238,7 @@ export default function LandingPage() {
           </p>
           <Link
             to="/programs"
-            className="bg-yellow-500 text-white px-8 py-4 rounded-full text-lg font-medium hover:bg-yellow-600 transition-all duration-300 transform hover:scale-105 inline-flex items-center justify-center"
+            className="bg-yellow-500 text-white px-8 py-4 rounded-full text-lg font-medium hover:bg-yellow-600 transition-all duration-300 transform hover:scale-105 inline-flex items-center"
           >
             Enroll Now
             <ArrowRight className="ml-2 h-5 w-5" />
