@@ -11,21 +11,24 @@ export default function Footer() {
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center space-x-2 mb-4">
               <BookOpen className="h-8 w-8 text-yellow-500" />
-              <span className="text-xl font-bold">US LEARNING CENTRE</span>
+              <div className="flex flex-col">
+                <span className="text-xl font-bold">US LEARNING CENTRE</span>
+                <span className="text-sm font-medium text-gray-400">USAcademy</span>
+              </div>
             </div>
             <p className="text-gray-400 mb-6 max-w-md">
               Empowering young learners with personalized intervention English teaching. 
               Building confidence in speaking, reading, and writing for children aged 4-12.
             </p>
             <div className="space-y-2">
-              <div className="flex items-center space-x-2 text-gray-400">
+              <a href="mailto:uslearningcenter1@gmail.com" className="flex items-center space-x-2 text-gray-400 hover:text-white transition-colors">
                 <Mail className="h-4 w-4" />
-                <span>hello@englishstars.com</span>
-              </div>
-              <div className="flex items-center space-x-2 text-gray-400">
+                <span>uslearningcenter1@gmail.com</span>
+              </a>
+              <a href="tel:+919253285350" className="flex items-center space-x-2 text-gray-400 hover:text-white transition-colors">
                 <Phone className="h-4 w-4" />
-                <span>+1 (555) 123-4567</span>
-              </div>
+                <span>+91 92532 85350</span>
+              </a>
             </div>
           </div>
 

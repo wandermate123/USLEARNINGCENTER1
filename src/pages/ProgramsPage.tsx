@@ -195,8 +195,8 @@ export default function ProgramsPage() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <div>
                 <img 
-                  src="https://images.pexels.com/photos/1181519/pexels-photo-1181519.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop&crop=face"
-                  alt="Teacher"
+                  src="/images/teacher-new.jpg"
+                  alt="Teacher Sujata Sangwan"
                   className="rounded-2xl shadow-lg w-full max-w-md mx-auto"
                 />
               </div>
