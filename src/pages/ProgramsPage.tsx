@@ -27,7 +27,7 @@ export default function ProgramsPage() {
       name: 'Level 1 - Beginner',
       price: 'Contact for Rates',
       period: '',
-      description: 'Perfect for English beginners aged 4-8',
+      description: 'Perfect for English and Maths beginners aged 4-8',
       features: [
         'Live Zoom sessions twice per week',
         '45-minute interactive sessions',
@@ -43,7 +43,7 @@ export default function ProgramsPage() {
       name: 'Level 2 - Intermediate',
       price: 'Contact for Rates',
       period: '',
-      description: 'For intermediate English learners aged 6-10',
+      description: 'For intermediate English and Maths learners aged 6-10',
       features: [
         'Live Zoom sessions twice per week',
         '45-minute interactive sessions',
@@ -61,7 +61,7 @@ export default function ProgramsPage() {
       name: 'Level 3 - Advanced',
       price: 'Contact for Rates',
       period: '',
-      description: 'For advanced English learners aged 8-12',
+      description: 'For advanced English and Maths learners aged 8-12',
       features: [
         'Live Zoom sessions twice per week',
         '45-minute interactive sessions',
@@ -113,10 +113,10 @@ export default function ProgramsPage() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center">
               <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-                Choose Your Child's English Level
+                Choose Your Child's English & Maths Level
               </h1>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Select the perfect level for your child's English learning journey. Sessions in each package must be used within 30, 60, or 90 days respectively. All sessions are live and interactive via Zoom.
+                Select the perfect level for your child's English and Maths learning journey. Sessions in each package must be used within 30, 60, or 90 days respectively. All sessions are live and interactive via Zoom.
               </p>
             </div>
           </div>
@@ -213,7 +213,7 @@ export default function ProgramsPage() {
                 <div className="space-y-3">
                   <div className="flex items-center">
                     <BookOpen className="h-5 w-5 text-blue-600 mr-3" />
-                    <span className="text-gray-700">Expert in teaching interventional English</span>
+                    <span className="text-gray-700">Expert in teaching interventional English and Maths</span>
                   </div>
                   <div className="flex items-center">
                     <User className="h-5 w-5 text-blue-600 mr-3" />

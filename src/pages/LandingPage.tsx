@@ -22,10 +22,10 @@ export default function LandingPage() {
           <div className="text-center">
             <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
               Unlock Your Child's<br />
-              <span className="text-yellow-400">Full English Potential</span>
+              <span className="text-yellow-400">Full English & Maths Potential</span>
             </h1>
             <p className="text-xl md:text-2xl text-blue-100 mb-8 max-w-3xl mx-auto">
-              Personalized Intervention English Teaching for Ages 4-12
+              Personalized Intervention English and Maths Teaching for Ages 4-12
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link 
@@ -51,7 +51,7 @@ export default function LandingPage() {
               Why Choose Live Interactive Learning?
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Our live interactive sessions provide personalized attention and real-time feedback to help children develop strong English skills with confidence.
+              Our live interactive sessions provide personalized attention and real-time feedback to help children develop strong English and Maths skills with confidence.
             </p>
           </div>
 
@@ -97,7 +97,7 @@ export default function LandingPage() {
               How It Works
             </h2>
             <p className="text-xl text-gray-600">
-              Simple steps to enroll in live English classes
+              Simple steps to enroll in live English and Maths classes
             </p>
           </div>
 
@@ -165,7 +165,7 @@ export default function LandingPage() {
                 ))}
               </div>
               <p className="text-gray-600 mb-6">
-                "Emma's confidence in speaking English has improved dramatically! The live sessions with real-time feedback made all the difference. She looks forward to every class!"
+                "Emma's confidence in speaking English and solving Maths problems has improved dramatically! The live sessions with real-time feedback made all the difference. She looks forward to every class!"
               </p>
               <div className="flex items-center">
                 <img 
@@ -187,7 +187,7 @@ export default function LandingPage() {
                 ))}
               </div>
               <p className="text-gray-600 mb-6">
-                "The live interactive sessions are amazing! Jake loves the small group setting and his vocabulary has expanded so much. The teacher gives individual attention to each child."
+                "The live interactive sessions are amazing! Jake loves the small group setting and his vocabulary and Maths skills have expanded so much. The teacher gives individual attention to each child."
               </p>
               <div className="flex items-center">
                 <img 
@@ -209,7 +209,7 @@ export default function LandingPage() {
                 ))}
               </div>
               <p className="text-gray-600 mb-6">
-                "Amazing results in just 2 months! Sophia's speaking confidence has grown tremendously. The live Zoom classes are engaging and she looks forward to them every week."
+                "Amazing results in just 2 months! Sophia's speaking confidence and Maths problem-solving skills have grown tremendously. The live Zoom classes are engaging and she looks forward to them every week."
               </p>
               <div className="flex items-center">
                 <img 
@@ -231,10 +231,10 @@ export default function LandingPage() {
       <div className="py-20 bg-gradient-to-r from-green-600 to-blue-600">
         <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-            Ready to Start Your Child's English Learning Journey?
+            Ready to Start Your Child's English & Maths Learning Journey?
           </h2>
           <p className="text-xl text-blue-100 mb-8">
-            Join hundreds of families who have seen remarkable improvements through our live interactive English classes.
+            Join hundreds of families who have seen remarkable improvements through our live interactive English and Maths classes.
           </p>
           <Link
             to="/programs"

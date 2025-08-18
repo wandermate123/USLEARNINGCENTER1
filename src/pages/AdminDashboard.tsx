@@ -847,7 +847,7 @@ export default function AdminDashboard() {
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <div className="border border-gray-200 rounded-lg p-4">
                   <h3 className="font-semibold text-gray-900 mb-2">Level 1 Sessions</h3>
-                  <p className="text-sm text-gray-600 mb-3">Beginner English classes</p>
+                  <p className="text-sm text-gray-600 mb-3">Beginner English and Maths classes</p>
                   <div className="space-y-2 text-sm">
                     <p><strong>Schedule:</strong> Mon & Wed 3:00 PM</p>
                     <p><strong>Students:</strong> 5 enrolled</p>
@@ -856,7 +856,7 @@ export default function AdminDashboard() {
                 </div>
                 <div className="border border-gray-200 rounded-lg p-4">
                   <h3 className="font-semibold text-gray-900 mb-2">Level 2 Sessions</h3>
-                  <p className="text-sm text-gray-600 mb-3">Intermediate English classes</p>
+                  <p className="text-sm text-gray-600 mb-3">Intermediate English and Maths classes</p>
                   <div className="space-y-2 text-sm">
                     <p><strong>Schedule:</strong> Tue & Thu 4:00 PM</p>
                     <p><strong>Students:</strong> 6 enrolled</p>
@@ -865,7 +865,7 @@ export default function AdminDashboard() {
                 </div>
                 <div className="border border-gray-200 rounded-lg p-4">
                   <h3 className="font-semibold text-gray-900 mb-2">Level 3 Sessions</h3>
-                  <p className="text-sm text-gray-600 mb-3">Advanced English classes</p>
+                  <p className="text-sm text-gray-600 mb-3">Advanced English and Maths classes</p>
                   <div className="space-y-2 text-sm">
                     <p><strong>Schedule:</strong> Wed & Fri 3:30 PM</p>
                     <p><strong>Students:</strong> 4 enrolled</p>

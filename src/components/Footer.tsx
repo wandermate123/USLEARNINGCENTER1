@@ -17,8 +17,8 @@ export default function Footer() {
               </div>
             </div>
             <p className="text-gray-400 mb-6 max-w-md">
-              Empowering young learners with personalized intervention English teaching. 
-              Building confidence in speaking, reading, and writing for children aged 4-12.
+              Empowering young learners with personalized intervention English and Maths teaching. 
+              Building confidence in speaking, reading, writing, and mathematical skills for children aged 4-12.
             </p>
             <div className="space-y-2">
               <a href="mailto:uslearningcenter1@gmail.com" className="flex items-center space-x-2 text-gray-400 hover:text-white transition-colors">
@@ -39,7 +39,7 @@ export default function Footer() {
               <li><Link to="/" className="text-gray-400 hover:text-white transition-colors">Home</Link></li>
               <li><Link to="/programs" className="text-gray-400 hover:text-white transition-colors">Programs</Link></li>
               <li><Link to="/programs" className="text-gray-400 hover:text-white transition-colors">Pricing</Link></li>
-              <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Contact</a></li>
+              <li><a href="mailto:uslearningcenter1@gmail.com" className="text-gray-400 hover:text-white transition-colors">Contact</a></li>
             </ul>
           </div>
 
@@ -47,9 +47,9 @@ export default function Footer() {
           <div>
             <h3 className="text-lg font-semibold mb-4">Support</h3>
             <ul className="space-y-2">
-              <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Help Center</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Privacy Policy</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Terms of Service</a></li>
+              <li><a href="mailto:uslearningcenter1@gmail.com" className="text-gray-400 hover:text-white transition-colors">Help Center</a></li>
+              <li><a href="/privacy-policy" className="text-gray-400 hover:text-white transition-colors">Privacy Policy</a></li>
+              <li><a href="/terms-of-service" className="text-gray-400 hover:text-white transition-colors">Terms of Service</a></li>
               <li><Link to="/admin/login" className="text-gray-400 hover:text-white transition-colors">Admin</Link></li>
             </ul>
           </div>
